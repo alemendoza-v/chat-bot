@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title></title>
+
+<script type="text/javascript">
+
+var know = {
+
+"What is your name ?":"I'm Batman... Just joking, I am Chatbot 1.0, designed to chat with you. So? What are you waiting for? Talk to me!",
+
+"Who built you?":"What is your business? Anyway, for what it's worth, I was designed by Ndubisi Obidigbo, Mainly in Javascript. You happy?",
+
+"he":"her"
+
+};
+
+function talk() {
+
+var user = document.getElementById("userBox").value;
+
+document.getElementById("chatLog").innerHTML += user + "<br>";
+
+if (user in know) {
+
+document.getElementById("chatLog").innerHTML += "Bot: " + know[user] + "<br>";
+
+} else {
+
+document.getElementById("chatLog").innerHTML += "Bot: I wasn't programmed to respond to such... Please say something I can understand.<br>";
+
+}
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<p id="chatLog"><!--CHAT--></p>
+
+<input type="text" id="userBox" onkeydown="if (event.keyCode == 13) {talk()}">
+
+</body>
+
+</html>

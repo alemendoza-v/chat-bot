@@ -4,48 +4,71 @@
 
 <head>
 
-<title></title>
+    <title></title>
 
-<script type="text/javascript">
+    <script type="text/javascript">
+        var memes = {
+            "mercy": "Heroes never die",
+            "sigma": "Im literally sigma, What is this melody?",
+            "reinhardt": "Hammer down!",
+            "dva": "Nerf this!",
+            "genji": "",
+        };
 
-var know = {
+        const español = {
+            "hola": "Hola, como estas?",
+            "bien": "Que bueno!",
+            "mal": "Que mal!",
+            "adios": "Adios!",
+            "gracias": "De nada!",
+            "que sabes hacer": "Soy un bot, no se mucho",
+            "que sabes hacer?": "Soy un bot, no se mucho",
+            "que haces": "Estoy aqui para ayudarte",
+            "que haces?": "Estoy aqui para ayudarte",
+            "como estas?": "Bien, y tu?",
+            "como estas": "Bien, y tu?",
+        }
 
-"What is your name ?":"I'm Batman... Just joking, I am Chatbot 1.0, designed to chat with you. So? What are you waiting for? Talk to me!",
+        const english = {
+            "hello": "Hello, how are you?",
+            "good": "That's good!",
+            "bad": "That's bad!",
+            "bye": "Bye!",
+            "thanks": "You're welcome!",
+            "what can you do": "I'm a bot, I don't know much",
+            "what are you doing": "I'm here to help you",
+            "what are you doing?": "I'm here to help you",
+            "how are you?": "Good, and you?",
+            "how are you": "Good, and you?",
+        }
 
-"Who built you?":"What is your business? Anyway, for what it's worth, I was designed by Ndubisi Obidigbo, Mainly in Javascript. You happy?",
 
-"he":"her"
+        function talk() {
+            var user = document.getElementById("userBox").value;
+            document.getElementById("chatLog").innerHTML += user + "<br>";
 
-};
-
-function talk() {
-
-var user = document.getElementById("userBox").value;
-
-document.getElementById("chatLog").innerHTML += user + "<br>";
-
-if (user in know) {
-
-document.getElementById("chatLog").innerHTML += "Bot: " + know[user] + "<br>";
-
-} else {
-
-document.getElementById("chatLog").innerHTML += "Bot: I wasn't programmed to respond to such... Please say something I can understand.<br>";
-
-}
-
-}
-
-</script>
-
+            if (user.toLowerCase() in español) {
+                document.getElementById("chatLog").innerHTML += español[user.toLowerCase()] + "<br>";
+                document.getElementById("userBox").value = "";
+            } else if (user.toLowerCase() in english) {
+                document.getElementById("chatLog").innerHTML += english[user.toLowerCase()] + "<br>";
+                document.getElementById("userBox").value = "";
+            } else if (user.toLowerCase() in memes) {
+                document.getElementById("chatLog").innerHTML += memes[user.toLowerCase()] + "<br>";
+                document.getElementById("userBox").value = "";
+            } else {
+                document.getElementById("chatLog").innerHTML += `Bot: No se responderte eso intenta algo como "${Object.keys(español)[Math.floor(Math.random() * Object.keys(español).length)]}" | I don't know how to answer that, try something like "${Object.keys(english)[Math.floor(Math.random() * Object.keys(english).length)]}" <br>`;
+                document.getElementById("userBox").value = "";
+            }
+        }
+    </script>
 </head>
 
 <body>
-
-<p id="chatLog"><!--CHAT--></p>
-
-<input type="text" id="userBox" onkeydown="if (event.keyCode == 13) {talk()}">
-
+    <p id="chatLog">
+        <!--CHAT-->
+    </p>
+    <input type="text" id="userBox" onkeydown="if (event.keyCode == 13) {talk()}">
 </body>
 
 </html>

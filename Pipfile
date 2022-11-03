@@ -8,7 +8,6 @@ flask = "*"
 twilio = "*"
 requests = "*"
 gunicorn = "*"
-chatterbot = "==1.0.4"
 
 [dev-packages]
 

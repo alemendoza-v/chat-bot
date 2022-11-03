@@ -1,24 +1,11 @@
 from flask import Flask, request
 import requests
 from twilio.twiml.messaging_response import MessagingResponse
-from chatterbot import ChatBot
-from chatterbot.trainers import ListTrainer
 
 app = Flask(__name__)
 
-chatbot = ChatBot('Charlie')
-
-trainer = ListTrainer(chatbot)
-
-trainer.train([
-    "Hi, can I help you?",
-    "Sure, I'd like to book a flight to Iceland.",
-    "Your flight has been booked."
-])
-
 @app.route('/bot', methods=['POST'])
 def bot():
-
     knownWords = {
         "hello": "Hello, how are you?",
         "good": "That's good!",
@@ -36,9 +23,6 @@ def bot():
     resp = MessagingResponse()
     msg = resp.message()
     responded = False
-
-    res = chatbot.get_response(incoming_msg)
-    return str(res)
     
     for word in incoming_msg.split():
         if word in knownWords:

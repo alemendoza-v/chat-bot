@@ -67,7 +67,7 @@ def bot():
         responded = True
     
     if not responded:
-        msg.body(incoming_msg)
+        msg.media(incoming_msg)
         # msg.body('No se como responder eso, pero aqui esta un gato | I don\'t know how to respond to that, but here\'s a cat')
         # getCat(msg)
 

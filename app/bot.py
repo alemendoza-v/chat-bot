@@ -3,6 +3,9 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
 
+def getCat(msg):
+    return msg.media('https://cataas.com/cat')
+
 @app.route('/bot', methods=['POST'])
 def bot():
     memes = {
@@ -60,10 +63,11 @@ def bot():
 
     if 'cat' in incoming_msg or 'gato' in incoming_msg or 'kitty' in incoming_msg or 'gatito' in incoming_msg:
         # return a cat pic
-        msg.media('https://cataas.com/cat')
+        getCat(msg)
         responded = True
     
     if not responded:
-        msg.body('I only know about famous quotes and cats, sorry!')
+        msg.body('No se como responder eso, pero aqui esta un gato | I don\'t know how to respond to that, but here\'s a cat')
+        getCat(msg)
 
     return str(resp)

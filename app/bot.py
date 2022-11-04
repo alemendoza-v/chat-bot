@@ -13,6 +13,7 @@ def bot():
         "bye": "Bye!",
         "thanks": "You're welcome!",
         "what can you do": "I'm a bot, I don't know much",
+        "what can you do?": "I'm a bot, I don't know much",
         "what are you doing": "I'm here to help you",
         "what are you doing?": "I'm here to help you",
         "how are you?": "Good, and you?",
@@ -24,11 +25,9 @@ def bot():
     msg = resp.message()
     responded = False
     
-    for word in incoming_msg.split():
-        if word in knownWords:
-            msg.body(knownWords[word])
-            responded = True
-            break
+    if incoming_msg in knownWords:
+        msg.body(knownWords[incoming_msg])
+        responded = True
     """
     if 'quote' in incoming_msg:
         # return a quote

@@ -1,11 +1,18 @@
 from flask import Flask, request
-import requests
 from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
 
 @app.route('/bot', methods=['POST'])
 def bot():
+    memes = {
+        "mercy": "Heroes never die!",
+        "sigma": "Im literally sigma, What is this melody?",
+        "reinhardt": "Hammer down!",
+        "dva": "Nerf this!",
+        "genji": "龍神の刃を取れ！",
+    }
+
     knownWords = {
         "hello": "Hello, how are you?",
         "good": "That's good!",
@@ -20,6 +27,20 @@ def bot():
         "how are you": "Good, and you?",
     }
 
+    palabrasConocidas = {
+        "hola": "Hola, como estas?",
+        "bien": "Que bueno!",
+        "mal": "Que mal!",
+        "adios": "Adios!",
+        "gracias": "De nada!",
+        "que sabes hacer": "Soy un bot, no se mucho",
+        "que sabes hacer?": "Soy un bot, no se mucho",
+        "que haces": "Estoy aqui para ayudarte",
+        "que haces?": "Estoy aqui para ayudarte",
+        "como estas?": "Bien, y tu?",
+        "como estas": "Bien, y tu?",
+    }
+
     incoming_msg = request.values.get('Body', '').lower()
     resp = MessagingResponse()
     msg = resp.message()
@@ -28,23 +49,21 @@ def bot():
     if incoming_msg in knownWords:
         msg.body(knownWords[incoming_msg])
         responded = True
-    """
-    if 'quote' in incoming_msg:
-        # return a quote
-        r = requests.get('https://api.quotable.io/random')
-        if r.status_code == 200:
-            data = r.json()
-            quote = f'{data["content"]} ({data["author"]})'
-        else:
-            quote = 'I could not retrieve a quote at this time, sorry.'
-        msg.body(quote)
+
+    elif incoming_msg in palabrasConocidas:
+        msg.body(palabrasConocidas[incoming_msg])
+        responded = True 
+
+    elif incoming_msg in memes:
+        msg.body(memes[incoming_msg])
         responded = True
-    """
-    if 'cat' in incoming_msg:
+
+    if 'cat' in incoming_msg or 'gato' in incoming_msg or 'kitty' in incoming_msg or 'gatito' in incoming_msg:
         # return a cat pic
         msg.media('https://cataas.com/cat')
         responded = True
     
     if not responded:
         msg.body('I only know about famous quotes and cats, sorry!')
+
     return str(resp)
